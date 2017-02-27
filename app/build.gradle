@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        demo {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file("${System.env.HOME}/.android/debug_demo.keystore")
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
-
     defaultConfig {
         applicationId "com.github.lukaszbudnik.bluetoothrobotcontrol"
         minSdkVersion 15
@@ -16,13 +23,21 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.demo
+        }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.firebase:firebase-messaging:9.4.0'
+    compile 'com.google.firebase:firebase-storage:9.4.0'
+    compile 'com.google.firebase:firebase-auth:9.4.0'
+    compile 'com.google.firebase:firebase-database:9.4.0'
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
     testCompile 'junit:junit:4.12'
 }
 
