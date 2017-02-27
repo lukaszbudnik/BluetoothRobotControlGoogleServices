@@ -123,7 +123,7 @@ public class RecordingThread extends Thread {
     }
 
     private void sendToQueue(String project, String uid, String aid, String language) {
-        String url = "https://" + project + "/recognize";
+        String url = "https://speech-recognition-dot-" + project + "/recognize";
         Map<String, String> params = new HashMap<>();
         params.put("uid", uid);
         params.put("aid", aid);
